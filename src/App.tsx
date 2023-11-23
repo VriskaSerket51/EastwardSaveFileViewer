@@ -27,7 +27,7 @@ function Viewer(props: ViewerProp) {
   if (name.endsWith(".info")) {
     const decoder = new TextDecoder();
     json = decoder.decode(buffer);
-  } else if (name.endsWith(".pack_save")) {
+  } else {
     // const hash = data.slice(0, 64);
     const raw = buffer.slice(64);
 
