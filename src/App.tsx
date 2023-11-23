@@ -32,15 +32,21 @@ function Viewer(props: ViewerProp) {
     const raw = buffer.slice(64);
 
     const str = pako.inflateRaw(raw);
-    const save = decode(str) as SaveDataStruct;
-    json = JSON.stringify(
-      {
-        data: save.data,
-        info: save.info,
-      },
-      null,
-      2
-    );
+    if (name.endsWith(".pack_save")) {
+      const save = decode(str) as SaveDataStruct;
+      json = JSON.stringify(
+        {
+          data: save.data,
+          info: save.info,
+        },
+        null,
+        2
+      );
+    } else {
+      const decoder = new TextDecoder();
+      console.log(decoder.decode(str));
+      json = decoder.decode(str);
+    }
   }
 
   return (
